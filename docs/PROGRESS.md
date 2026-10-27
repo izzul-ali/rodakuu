@@ -14,7 +14,7 @@
 | --- | ------- | ----------------------- | ------- |
 | M0  | lulus   | 27 Oktober 2026        | Scaffold & toolchain; debug APK terbentuk |
 | M1  | lulus   | 27 Oktober 2026        | Core (env, error, theme, utils, widgets, tests T-UT-01..04,09,10) |
-| M2  | belum   |                         | Backend (SQL) |
+| M2  | lulus   | 27 Oktober 2026        | Backend (SQL 0001_init, seed, README); review silang kolom, RPC, enum & batas 30 hari konsisten |
 | M3  | belum   |                         | Auth, router, shell |
 | M4  | belum   |                         | Kendaraan |
 | M5  | belum   |                         | Pemesanan & riwayat |
@@ -53,6 +53,8 @@
 
 - 27 Oktober 2026 — Scaffold project id.rodakuu.rodakuu — Sesuai PRD 12.1.
 - 27 Oktober 2026 — Versi paket mengikuti hasil resolusi pub add — Kompatibel Flutter 3.47 dan Dart 3.13.
+- 27 Oktober 2026 — Review silang SQL 0001_init.sql & seed.sql — Kolom seed diselaraskan dengan 10 nilai (image_url default null) agar lolos validasi Postgres tanpa syntax error.
+- 27 Oktober 2026 — SQL belum dieksekusi ke Supabase karena belum ada kredensial remote dari pengguna.
 
 ## Versi paket terpasang (hasil flutter pub add)
 
