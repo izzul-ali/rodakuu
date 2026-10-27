@@ -15,7 +15,7 @@
 | M0  | lulus   | 27 Oktober 2026        | Scaffold & toolchain; debug APK terbentuk |
 | M1  | lulus   | 27 Oktober 2026        | Core (env, error, theme, utils, widgets, tests T-UT-01..04,09,10) |
 | M2  | lulus   | 27 Oktober 2026        | Backend (SQL 0001_init, seed, README); review silang kolom, RPC, enum & batas 30 hari konsisten |
-| M3  | belum   |                         | Auth, router, shell |
+| M3  | lulus   | 27 Oktober 2026        | Auth, router, shell, debug APK terbukti lulus (13.5s) |
 | M4  | belum   |                         | Kendaraan |
 | M5  | belum   |                         | Pemesanan & riwayat |
 | M6  | belum   |                         | Profil |
@@ -26,11 +26,11 @@
 
 | FR         | File implementasi     | Test                   | Status |
 | ---------- | --------------------- | ---------------------- | ------ |
-| FR-AUTH-01 | lib/features/auth/... | test/features/auth/... | belum  |
-| FR-AUTH-02 | lib/features/auth/... | test/features/auth/... | belum  |
-| FR-AUTH-03 | lib/features/auth/... | test/features/auth/... | belum  |
-| FR-AUTH-04 | lib/features/auth/... | test/features/auth/... | belum  |
-| FR-AUTH-05 | lib/core/router/...   | test/features/auth/... | belum  |
+| FR-AUTH-01 | lib/features/auth/presentation/screens/register_screen.dart | test/features/auth/register_screen_test.dart | lulus  |
+| FR-AUTH-02 | lib/features/auth/presentation/screens/login_screen.dart    | test/features/auth/login_screen_test.dart    | lulus  |
+| FR-AUTH-03 | lib/features/auth/data/supabase_auth_repository.dart       | test/features/auth/login_screen_test.dart    | lulus  |
+| FR-AUTH-04 | lib/features/shell/main_shell_screen.dart                  | test/features/auth/login_screen_test.dart    | lulus  |
+| FR-AUTH-05 | lib/core/router/app_router.dart                            | test/features/auth/login_screen_test.dart    | lulus  |
 | FR-VEH-01 | lib/features/vehicles | test/features/vehicles | belum  |
 | FR-VEH-02 | lib/features/vehicles | test/features/vehicles | belum  |
 | FR-VEH-03 | lib/features/vehicles | test/features/vehicles | belum  |
