@@ -13,7 +13,7 @@
 | M   | Status  | Gerbang lulus (tanggal) | Catatan |
 | --- | ------- | ----------------------- | ------- |
 | M0  | lulus   | 27 Oktober 2026        | Scaffold & toolchain; debug APK terbentuk |
-| M1  | belum   |                         | Core |
+| M1  | lulus   | 27 Oktober 2026        | Core (env, error, theme, utils, widgets, tests T-UT-01..04,09,10) |
 | M2  | belum   |                         | Backend (SQL) |
 | M3  | belum   |                         | Auth, router, shell |
 | M4  | belum   |                         | Kendaraan |

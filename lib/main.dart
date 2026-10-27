@@ -1,13 +1,3 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:rodakuu/bootstrap.dart';
 
-void main() {
-  runApp(
-    const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('RodaKuu'),
-        ),
-      ),
-    ),
-  );
-}
+Future<void> main() => bootstrap();
