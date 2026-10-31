@@ -20,7 +20,7 @@
 | M5  | lulus   | 31 Oktober 2026        | Pemesanan & riwayat: form, kalkulator, riwayat, detail, pembatalan, debug APK lulus (27.5s) |
 | M6  | lulus   | 31 Oktober 2026        | Profil: avatar, lihat profil, ubah profil, keluar; test T-WT-15 lulus, seluruh stub layar tuntas diganti nyata |
 | M7  | lulus   | 31 Oktober 2026        | Polesan: audit responsif 6 ukuran x 2 skala teks (T-RS-01 lulus), audit aksesibilitas, audit teks dan anti-AI-slop |
-| M8  | belum   |                         | QA akhir & release build |
+| M8  | lulus   | 31 Oktober 2026        | QA akhir & release build: seluruh 9 skrip audit lulus, debug APK (11.4s) dan release APK (87.7s, 59.6MB) sukses dibangun |
 
 ## Keterlacakan FR
 
@@ -57,6 +57,7 @@
 - 27 Oktober 2026 — SQL belum dieksekusi ke Supabase karena belum ada kredensial remote dari pengguna.
 - 31 Oktober 2026 — Implementasi M6 (Profil) selesai — Semua fitur lihat dan ubah profil serta keluar akun selesai, lulus verifikasi analyzer dan widget test.
 - 31 Oktober 2026 — Implementasi M7 (Polesan) selesai — Seluruh 9 layar lulus audit responsif T-RS-01 pada 6 ukuran layar x 2 skala teks (108 varian uji), audit aksesibilitas (seluruh IconButton bertooltip, gambar ber-semantics), dan audit teks UI.
+- 31 Oktober 2026 — Implementasi M8 (QA akhir & build) selesai — Format bersih, analyzer 0 issue, 51 test lulus, audit 9 skrip bersih (tanpa pola terlarang, tanpa file yatim, semua layar terdaftar, separasi layer bersih, manifest lengkap), debug APK & release APK sukses terkompilasi.
 
 ## Versi paket terpasang (hasil flutter pub add)
 
@@ -72,8 +73,13 @@
 
 ## Hambatan
 
-- Tidak ada.
+- SQL belum dieksekusi ke backend Supabase nyata karena berkas env.json dan kredensial Supabase remote belum disediakan oleh pengguna (tersedia env.example.json). Aplikasi siap terhubung begitu kredensial diisi.
 
 ## Saran lanjutan (di luar lingkup)
 
-- Belum ada.
+- Payment gateway terintegrasi (Midtrans / Xendit).
+- Aplikasi manajemen armada terpisah untuk Admin.
+- Login sosial (Google / Apple OAuth).
+- Notifikasi push (FCM) pembaruan status pesanan.
+- Peta / GPS untuk penentuan lokasi penjemputan armada.
+- Pagination tak terbatas untuk katalog kendaraan skala besar (> 200 armada).

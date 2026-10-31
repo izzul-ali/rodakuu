@@ -75,7 +75,7 @@ void main() {
     ),
   );
 
-  final dummyProfile = const Profile(
+  const dummyProfile = Profile(
     id: 'u-1',
     fullName: 'Budi Santoso',
     phone: '081234567890',
