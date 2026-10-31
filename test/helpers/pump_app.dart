@@ -45,6 +45,7 @@ Future<void> pumpApp(
 
   await tester.pumpWidget(
     ProviderScope(
+      retry: (retryCount, error) => null,
       overrides: overrides,
       child: MaterialApp.router(
         theme: AppTheme.light(useGoogleFonts: false),

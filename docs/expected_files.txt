@@ -105,3 +105,4 @@ lib/features/profile/presentation/screens/profile_screen.dart
 lib/features/profile/presentation/screens/edit_profile_screen.dart
 lib/features/profile/presentation/widgets/profile_avatar.dart
 lib/features/profile/presentation/widgets/profile_menu_tile.dart
+

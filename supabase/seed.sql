@@ -21,3 +21,4 @@ values
    'Skuter besar yang stabil dan nyaman untuk jarak menengah.', true),
   ('motor', 'Honda',      'PCX 160',       2023, 'matic',  'bensin', 2, 210000,
    'Skuter premium dengan posisi berkendara nyaman untuk perjalanan jauh.', true);
+

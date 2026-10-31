@@ -16,7 +16,7 @@
 | M1  | lulus   | 27 Oktober 2026        | Core (env, error, theme, utils, widgets, tests T-UT-01..04,09,10) |
 | M2  | lulus   | 27 Oktober 2026        | Backend (SQL 0001_init, seed, README); review silang kolom, RPC, enum & batas 30 hari konsisten |
 | M3  | lulus   | 27 Oktober 2026        | Auth, router, shell, debug APK terbukti lulus (13.5s) |
-| M4  | belum   |                         | Kendaraan |
+| M4  | lulus   | 31 Oktober 2026        | Kendaraan: daftar, filter, detail, tests T-UT-07..08,11 & T-WT-05..09 |
 | M5  | belum   |                         | Pemesanan & riwayat |
 | M6  | belum   |                         | Profil |
 | M7  | belum   |                         | Polesan |
@@ -31,12 +31,12 @@
 | FR-AUTH-03 | lib/features/auth/data/supabase_auth_repository.dart       | test/features/auth/login_screen_test.dart    | lulus  |
 | FR-AUTH-04 | lib/features/shell/main_shell_screen.dart                  | test/features/auth/login_screen_test.dart    | lulus  |
 | FR-AUTH-05 | lib/core/router/app_router.dart                            | test/features/auth/login_screen_test.dart    | lulus  |
-| FR-VEH-01 | lib/features/vehicles | test/features/vehicles | belum  |
-| FR-VEH-02 | lib/features/vehicles | test/features/vehicles | belum  |
-| FR-VEH-03 | lib/features/vehicles | test/features/vehicles | belum  |
-| FR-VEH-04 | lib/features/vehicles | test/features/vehicles | belum  |
-| FR-VEH-05 | lib/features/vehicles | test/features/vehicles | belum  |
-| FR-VEH-06 | lib/features/vehicles | test/features/vehicles | belum  |
+| FR-VEH-01 | lib/features/vehicles/presentation/widgets/vehicle_card.dart        | test/features/vehicles/vehicle_list_screen_test.dart   | lulus  |
+| FR-VEH-02 | lib/features/vehicles/presentation/screens/vehicle_list_screen.dart | test/features/vehicles/vehicle_list_screen_test.dart   | lulus  |
+| FR-VEH-03 | lib/features/vehicles/presentation/widgets/vehicle_filter_sheet.dart | test/features/vehicles/vehicle_filter_test.dart        | lulus  |
+| FR-VEH-04 | lib/features/vehicles/presentation/widgets/vehicle_filter_sheet.dart | test/features/vehicles/vehicle_filter_test.dart        | lulus  |
+| FR-VEH-05 | lib/features/vehicles/presentation/screens/vehicle_list_screen.dart | test/features/vehicles/vehicle_list_screen_test.dart   | lulus  |
+| FR-VEH-06 | lib/features/vehicles/presentation/screens/vehicle_detail_screen.dart| test/features/vehicles/vehicle_detail_screen_test.dart | lulus  |
 | FR-BKG-01 | lib/features/bookings | test/features/bookings | belum  |
 | FR-BKG-02 | lib/features/bookings | test/features/bookings | belum  |
 | FR-BKG-03 | lib/features/bookings | test/features/bookings | belum  |

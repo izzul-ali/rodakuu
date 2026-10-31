@@ -25,3 +25,4 @@ Langkah-langkah penyiapan proyek backend Supabase:
 5. **(Opsional) Unggah Foto Kendaraan:**
    - Masuk ke menu *Storage -> vehicle-images*.
    - Unggah gambar kendaraan dan perbarui kolom `image_url` pada tabel `vehicles` dengan URL publik gambar tersebut.
+

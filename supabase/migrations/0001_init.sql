@@ -254,3 +254,4 @@ grant execute on function public.get_booked_ranges(uuid) to authenticated;
 insert into storage.buckets (id, name, public)
 values ('vehicle-images', 'vehicle-images', true)
 on conflict (id) do nothing;
+
