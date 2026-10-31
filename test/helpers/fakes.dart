@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:rodakuu/core/error/app_failure.dart';
 import 'package:rodakuu/features/auth/domain/auth_repository.dart';
+import 'package:rodakuu/features/bookings/domain/entities/booked_range.dart';
+import 'package:rodakuu/features/bookings/domain/entities/booking.dart';
+import 'package:rodakuu/features/bookings/domain/entities/booking_request.dart';
+import 'package:rodakuu/features/bookings/domain/repositories/booking_repository.dart';
 import 'package:rodakuu/features/vehicles/domain/entities/vehicle.dart';
 import 'package:rodakuu/features/vehicles/domain/entities/vehicle_filter.dart';
 import 'package:rodakuu/features/vehicles/domain/repositories/vehicle_repository.dart';
@@ -110,5 +114,105 @@ class FakeVehicleRepository implements VehicleRepository {
       throw const NotFoundFailure('Kendaraan tidak ditemukan.');
     }
     return vehicle;
+  }
+}
+
+/// Implementasi tiruan (fake) repositori pemesanan untuk pengujian.
+class FakeBookingRepository implements BookingRepository {
+  FakeBookingRepository({
+    List<Booking>? bookings,
+    List<BookedRange>? bookedRanges,
+  }) : bookings = bookings ?? [],
+       bookedRanges = bookedRanges ?? [];
+
+  List<Booking> bookings;
+  List<BookedRange> bookedRanges;
+
+  Future<String> Function(BookingRequest request)? onCreateBooking;
+  Future<List<Booking>> Function()? onGetMyBookings;
+  Future<Booking> Function(String id)? onGetBooking;
+  Future<void> Function(String id)? onCancelBooking;
+  Future<List<BookedRange>> Function(String vehicleId)? onGetBookedRanges;
+
+  int createBookingCallCount = 0;
+  BookingRequest? lastRequest;
+  int getMyBookingsCallCount = 0;
+  int getBookingCallCount = 0;
+  int cancelBookingCallCount = 0;
+  String? lastCancelledId;
+  int getBookedRangesCallCount = 0;
+
+  @override
+  Future<String> createBooking(BookingRequest request) async {
+    createBookingCallCount++;
+    lastRequest = request;
+    if (onCreateBooking != null) {
+      return onCreateBooking!(request);
+    }
+    const newId = 'bkg-new-123';
+    return newId;
+  }
+
+  @override
+  Future<List<Booking>> getMyBookings() async {
+    getMyBookingsCallCount++;
+    if (onGetMyBookings != null) {
+      return onGetMyBookings!();
+    }
+    return bookings;
+  }
+
+  @override
+  Future<Booking> getBooking(String id) async {
+    getBookingCallCount++;
+    if (onGetBooking != null) {
+      return onGetBooking!(id);
+    }
+    final booking = bookings.cast<Booking?>().firstWhere(
+      (b) => b?.id == id,
+      orElse: () => null,
+    );
+    if (booking == null) {
+      throw const NotFoundFailure('Pesanan tidak ditemukan.');
+    }
+    return booking;
+  }
+
+  @override
+  Future<void> cancelBooking(String id) async {
+    cancelBookingCallCount++;
+    lastCancelledId = id;
+    if (onCancelBooking != null) {
+      await onCancelBooking!(id);
+      return;
+    }
+    final index = bookings.indexWhere((b) => b.id == id);
+    if (index != -1) {
+      final old = bookings[index];
+      bookings[index] = Booking(
+        id: old.id,
+        userId: old.userId,
+        vehicleId: old.vehicleId,
+        startDate: old.startDate,
+        endDate: old.endDate,
+        totalDays: old.totalDays,
+        pricePerDay: old.pricePerDay,
+        totalPrice: old.totalPrice,
+        pickupLocation: old.pickupLocation,
+        notes: old.notes,
+        status: BookingStatus.dibatalkan,
+        createdAt: old.createdAt,
+        vehicle: old.vehicle,
+      );
+    }
+  }
+
+  @override
+  Future<List<BookedRange>> getBookedRanges(String vehicleId) async {
+    getBookedRangesCallCount++;
+    if (onGetBookedRanges != null) {
+      return onGetBookedRanges!(vehicleId);
+    }
+    return bookedRanges;
   }
 }

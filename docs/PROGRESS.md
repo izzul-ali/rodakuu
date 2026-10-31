@@ -17,7 +17,7 @@
 | M2  | lulus   | 27 Oktober 2026        | Backend (SQL 0001_init, seed, README); review silang kolom, RPC, enum & batas 30 hari konsisten |
 | M3  | lulus   | 27 Oktober 2026        | Auth, router, shell, debug APK terbukti lulus (13.5s) |
 | M4  | lulus   | 31 Oktober 2026        | Kendaraan: daftar, filter, detail, tests T-UT-07..08,11 & T-WT-05..09 |
-| M5  | belum   |                         | Pemesanan & riwayat |
+| M5  | lulus   | 31 Oktober 2026        | Pemesanan & riwayat: form, kalkulator, riwayat, detail, pembatalan, debug APK lulus (27.5s) |
 | M6  | belum   |                         | Profil |
 | M7  | belum   |                         | Polesan |
 | M8  | belum   |                         | QA akhir & release build |
@@ -37,14 +37,14 @@
 | FR-VEH-04 | lib/features/vehicles/presentation/widgets/vehicle_filter_sheet.dart | test/features/vehicles/vehicle_filter_test.dart        | lulus  |
 | FR-VEH-05 | lib/features/vehicles/presentation/screens/vehicle_list_screen.dart | test/features/vehicles/vehicle_list_screen_test.dart   | lulus  |
 | FR-VEH-06 | lib/features/vehicles/presentation/screens/vehicle_detail_screen.dart| test/features/vehicles/vehicle_detail_screen_test.dart | lulus  |
-| FR-BKG-01 | lib/features/bookings | test/features/bookings | belum  |
-| FR-BKG-02 | lib/features/bookings | test/features/bookings | belum  |
-| FR-BKG-03 | lib/features/bookings | test/features/bookings | belum  |
-| FR-BKG-04 | lib/features/bookings | test/features/bookings | belum  |
-| FR-BKG-05 | lib/features/bookings | test/features/bookings | belum  |
-| FR-BKG-06 | lib/features/bookings | test/features/bookings | belum  |
-| FR-HIS-01 | lib/features/bookings | test/features/bookings | belum  |
-| FR-HIS-02 | lib/features/bookings | test/features/bookings | belum  |
+| FR-BKG-01 | lib/features/bookings/presentation/screens/booking_form_screen.dart   | test/features/bookings/booking_form_screen_test.dart    | lulus  |
+| FR-BKG-02 | lib/features/bookings/presentation/widgets/date_range_field.dart     | test/features/bookings/booking_form_screen_test.dart    | lulus  |
+| FR-BKG-03 | lib/features/bookings/presentation/widgets/price_summary.dart        | test/features/bookings/booking_calculator_test.dart     | lulus  |
+| FR-BKG-04 | lib/features/bookings/presentation/providers/booking_form_controller.dart | test/features/bookings/booking_form_screen_test.dart | lulus  |
+| FR-BKG-05 | lib/features/bookings/presentation/screens/booking_detail_screen.dart | test/features/bookings/booking_history_screen_test.dart | lulus  |
+| FR-BKG-06 | lib/features/bookings/presentation/screens/booking_detail_screen.dart | test/features/bookings/booking_history_screen_test.dart | lulus  |
+| FR-HIS-01 | lib/features/bookings/presentation/screens/booking_history_screen.dart| test/features/bookings/booking_history_screen_test.dart | lulus  |
+| FR-HIS-02 | lib/features/bookings/presentation/widgets/booking_card.dart          | test/features/bookings/booking_history_screen_test.dart | lulus  |
 | FR-PRF-01 | lib/features/profile  | test/features/profile  | belum  |
 | FR-PRF-02 | lib/features/profile  | test/features/profile  | belum  |
 | FR-PRF-03 | lib/features/profile  | test/features/profile  | belum  |
