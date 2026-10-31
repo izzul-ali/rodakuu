@@ -26,21 +26,23 @@ class VehicleDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final vehicleAsync = ref.watch(vehicleDetailProvider(vehicleId));
+    final vehicle = vehicleAsync.value;
 
     return Scaffold(
       backgroundColor: AppColors.white,
       body: switch (vehicleAsync) {
         AsyncData(:final value) => _VehicleDetailContent(vehicle: value),
-        AsyncError(:final error) => SafeArea(
+        AsyncError(:final error) when vehicle == null => SafeArea(
           child: AppErrorView(
             message: failureMessage(error),
             onRetry: () => ref.invalidate(vehicleDetailProvider(vehicleId)),
           ),
         ),
-        _ => const Scaffold(body: Center(child: AppLoading())),
+        _ when vehicle != null => _VehicleDetailContent(vehicle: vehicle),
+        _ => const Center(child: AppLoading()),
       },
-      bottomNavigationBar: vehicleAsync.hasValue
-          ? _VehicleDetailBottomBar(vehicle: vehicleAsync.requireValue)
+      bottomNavigationBar: vehicle != null
+          ? _VehicleDetailBottomBar(vehicle: vehicle)
           : null,
     );
   }
@@ -59,7 +61,7 @@ class _VehicleDetailContent extends StatelessWidget {
       child: ResponsiveCenter(
         maxWidth: 640,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
               children: [
@@ -127,7 +129,7 @@ class _VehicleDetailContent extends StatelessWidget {
                 vertical: AppSpacing.lg,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -280,6 +282,7 @@ class _VehicleDetailBottomBar extends StatelessWidget {
         top: false,
         child: ResponsiveCenter(
           maxWidth: 640,
+          heightFactor: 1.0,
           padding: EdgeInsets.symmetric(
             horizontal: context.screenHorizontalPadding,
             vertical: AppSpacing.md,

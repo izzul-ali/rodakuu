@@ -291,6 +291,7 @@ class _BookingFormScreenState extends ConsumerState<BookingFormScreen> {
         top: false,
         child: ResponsiveCenter(
           maxWidth: 640,
+          heightFactor: 1.0,
           padding: EdgeInsets.symmetric(
             horizontal: context.screenHorizontalPadding,
             vertical: AppSpacing.md,

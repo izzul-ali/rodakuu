@@ -58,6 +58,7 @@
 - 31 Oktober 2026 — Implementasi M6 (Profil) selesai — Semua fitur lihat dan ubah profil serta keluar akun selesai, lulus verifikasi analyzer dan widget test.
 - 31 Oktober 2026 — Implementasi M7 (Polesan) selesai — Seluruh 9 layar lulus audit responsif T-RS-01 pada 6 ukuran layar x 2 skala teks (108 varian uji), audit aksesibilitas (seluruh IconButton bertooltip, gambar ber-semantics), dan audit teks UI.
 - 31 Oktober 2026 — Implementasi M8 (QA akhir & build) selesai — Format bersih, analyzer 0 issue, 51 test lulus, audit 9 skrip bersih (tanpa pola terlarang, tanpa file yatim, semua layar terdaftar, separasi layer bersih, manifest lengkap), debug APK & release APK sukses terkompilasi.
+- 31 Oktober 2026 — Perbaikan layout VehicleDetailScreen dan ResponsiveCenter — Mengatasi ekspansi vertikal berlebih pada bottom bar di Scaffold (menambahkan `heightFactor: 1.0` pada `ResponsiveCenter`) serta memastikan foto kendaraan 16:10 dan spesifikasi tampil proporsional merentang penuh lebar (`CrossAxisAlignment.stretch`). Seluruh 51 test lulus tanpa error.
 
 ## Versi paket terpasang (hasil flutter pub add)
 
