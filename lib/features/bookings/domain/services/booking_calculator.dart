@@ -15,4 +15,3 @@ abstract final class BookingCalculator {
     return pricePerDay * days;
   }
 }
-

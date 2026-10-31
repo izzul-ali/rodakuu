@@ -6,6 +6,8 @@ import 'package:rodakuu/features/bookings/domain/entities/booked_range.dart';
 import 'package:rodakuu/features/bookings/domain/entities/booking.dart';
 import 'package:rodakuu/features/bookings/domain/entities/booking_request.dart';
 import 'package:rodakuu/features/bookings/domain/repositories/booking_repository.dart';
+import 'package:rodakuu/features/profile/domain/entities/profile.dart';
+import 'package:rodakuu/features/profile/domain/repositories/profile_repository.dart';
 import 'package:rodakuu/features/vehicles/domain/entities/vehicle.dart';
 import 'package:rodakuu/features/vehicles/domain/entities/vehicle_filter.dart';
 import 'package:rodakuu/features/vehicles/domain/repositories/vehicle_repository.dart';
@@ -214,5 +216,57 @@ class FakeBookingRepository implements BookingRepository {
       return onGetBookedRanges!(vehicleId);
     }
     return bookedRanges;
+  }
+}
+
+/// Implementasi tiruan (fake) repositori profil untuk pengujian.
+class FakeProfileRepository implements ProfileRepository {
+  FakeProfileRepository({this.profile});
+
+  Profile? profile;
+  int getProfileCallCount = 0;
+  int updateProfileCallCount = 0;
+  String? lastUpdatedUserId;
+  String? lastUpdatedFullName;
+  String? lastUpdatedPhone;
+
+  Future<Profile> Function(String userId)? onGetProfile;
+  Future<void> Function(String userId, String fullName, String? phone)?
+  onUpdateProfile;
+
+  @override
+  Future<Profile> getProfile(String userId) async {
+    getProfileCallCount++;
+    if (onGetProfile != null) {
+      return onGetProfile!(userId);
+    }
+    if (profile == null) {
+      throw const NotFoundFailure('Profil pengguna tidak ditemukan.');
+    }
+    return profile!;
+  }
+
+  @override
+  Future<void> updateProfile({
+    required String userId,
+    required String fullName,
+    String? phone,
+  }) async {
+    updateProfileCallCount++;
+    lastUpdatedUserId = userId;
+    lastUpdatedFullName = fullName;
+    lastUpdatedPhone = phone;
+    if (onUpdateProfile != null) {
+      await onUpdateProfile!(userId, fullName, phone);
+      return;
+    }
+    if (profile != null) {
+      profile = Profile(
+        id: profile!.id,
+        fullName: fullName,
+        phone: phone,
+        email: profile!.email,
+      );
+    }
   }
 }

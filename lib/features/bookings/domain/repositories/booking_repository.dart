@@ -19,4 +19,3 @@ abstract interface class BookingRepository {
   /// Mengambil daftar rentang tanggal yang sudah dipesan untuk suatu kendaraan.
   Future<List<BookedRange>> getBookedRanges(String vehicleId);
 }
-

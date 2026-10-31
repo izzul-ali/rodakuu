@@ -18,7 +18,7 @@
 | M3  | lulus   | 27 Oktober 2026        | Auth, router, shell, debug APK terbukti lulus (13.5s) |
 | M4  | lulus   | 31 Oktober 2026        | Kendaraan: daftar, filter, detail, tests T-UT-07..08,11 & T-WT-05..09 |
 | M5  | lulus   | 31 Oktober 2026        | Pemesanan & riwayat: form, kalkulator, riwayat, detail, pembatalan, debug APK lulus (27.5s) |
-| M6  | belum   |                         | Profil |
+| M6  | lulus   | 31 Oktober 2026        | Profil: avatar, lihat profil, ubah profil, keluar; test T-WT-15 lulus, seluruh stub layar tuntas diganti nyata |
 | M7  | belum   |                         | Polesan |
 | M8  | belum   |                         | QA akhir & release build |
 
@@ -45,9 +45,9 @@
 | FR-BKG-06 | lib/features/bookings/presentation/screens/booking_detail_screen.dart | test/features/bookings/booking_history_screen_test.dart | lulus  |
 | FR-HIS-01 | lib/features/bookings/presentation/screens/booking_history_screen.dart| test/features/bookings/booking_history_screen_test.dart | lulus  |
 | FR-HIS-02 | lib/features/bookings/presentation/widgets/booking_card.dart          | test/features/bookings/booking_history_screen_test.dart | lulus  |
-| FR-PRF-01 | lib/features/profile  | test/features/profile  | belum  |
-| FR-PRF-02 | lib/features/profile  | test/features/profile  | belum  |
-| FR-PRF-03 | lib/features/profile  | test/features/profile  | belum  |
+| FR-PRF-01 | lib/features/profile/presentation/screens/profile_screen.dart         | test/features/profile/edit_profile_screen_test.dart   | lulus  |
+| FR-PRF-02 | lib/features/profile/presentation/screens/edit_profile_screen.dart    | test/features/profile/edit_profile_screen_test.dart   | lulus  |
+| FR-PRF-03 | lib/features/profile/presentation/screens/profile_screen.dart         | test/features/profile/edit_profile_screen_test.dart   | lulus  |
 
 ## Keputusan
 
@@ -55,6 +55,7 @@
 - 27 Oktober 2026 — Versi paket mengikuti hasil resolusi pub add — Kompatibel Flutter 3.47 dan Dart 3.13.
 - 27 Oktober 2026 — Review silang SQL 0001_init.sql & seed.sql — Kolom seed diselaraskan dengan 10 nilai (image_url default null) agar lolos validasi Postgres tanpa syntax error.
 - 27 Oktober 2026 — SQL belum dieksekusi ke Supabase karena belum ada kredensial remote dari pengguna.
+- 31 Oktober 2026 — Implementasi M6 (Profil) selesai — Semua fitur lihat dan ubah profil serta keluar akun selesai, lulus verifikasi analyzer dan widget test.
 
 ## Versi paket terpasang (hasil flutter pub add)
 
