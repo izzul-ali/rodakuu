@@ -115,19 +115,19 @@ class BookingDetailScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Status Header
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.xs,
               children: [
-                Expanded(
-                  child: Text(
-                    'Status Pesanan',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.navy900,
-                    ),
+                Text(
+                  'Status Pesanan',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.navy900,
                   ),
                 ),
-                const SizedBox(width: AppSpacing.sm),
                 BookingStatusChip(status: booking.status, isLarge: true),
               ],
             ),
@@ -331,6 +331,7 @@ class BookingDetailScreen extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
+          flex: 2,
           child: Text(
             label,
             style: theme.textTheme.bodyMedium?.copyWith(
@@ -339,12 +340,15 @@ class BookingDetailScreen extends ConsumerWidget {
           ),
         ),
         const SizedBox(width: AppSpacing.md),
-        Text(
-          value,
-          textAlign: TextAlign.right,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
-            color: AppColors.navy900,
+        Expanded(
+          flex: 3,
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
+              color: AppColors.navy900,
+            ),
           ),
         ),
       ],

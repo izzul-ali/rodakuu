@@ -54,8 +54,11 @@ Future<void> pumpApp(
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         routerConfig: testRouter,
         builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context)
-              .copyWith(textScaler: TextScaler.linear(textScale)),
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.linear(
+              textScale,
+            ).clamp(minScaleFactor: 0.85, maxScaleFactor: 1.3),
+          ),
           child: child!,
         ),
       ),

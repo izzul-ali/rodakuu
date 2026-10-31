@@ -34,7 +34,7 @@ class BookingCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 72,
+                width: 56,
                 height: 56,
                 child: VehicleImage(
                   type: vehicleType,
@@ -48,24 +48,17 @@ class BookingCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            vehicleName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.navy900,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.xs),
-                        BookingStatusChip(status: booking.status),
-                      ],
+                    Text(
+                      vehicleName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.navy900,
+                      ),
                     ),
+                    const SizedBox(height: AppSpacing.xs),
+                    BookingStatusChip(status: booking.status),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
                       formatDateRange(booking.startDate, booking.endDate),

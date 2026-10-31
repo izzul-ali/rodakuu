@@ -19,7 +19,7 @@
 | M4  | lulus   | 31 Oktober 2026        | Kendaraan: daftar, filter, detail, tests T-UT-07..08,11 & T-WT-05..09 |
 | M5  | lulus   | 31 Oktober 2026        | Pemesanan & riwayat: form, kalkulator, riwayat, detail, pembatalan, debug APK lulus (27.5s) |
 | M6  | lulus   | 31 Oktober 2026        | Profil: avatar, lihat profil, ubah profil, keluar; test T-WT-15 lulus, seluruh stub layar tuntas diganti nyata |
-| M7  | belum   |                         | Polesan |
+| M7  | lulus   | 31 Oktober 2026        | Polesan: audit responsif 6 ukuran x 2 skala teks (T-RS-01 lulus), audit aksesibilitas, audit teks dan anti-AI-slop |
 | M8  | belum   |                         | QA akhir & release build |
 
 ## Keterlacakan FR
@@ -56,6 +56,7 @@
 - 27 Oktober 2026 — Review silang SQL 0001_init.sql & seed.sql — Kolom seed diselaraskan dengan 10 nilai (image_url default null) agar lolos validasi Postgres tanpa syntax error.
 - 27 Oktober 2026 — SQL belum dieksekusi ke Supabase karena belum ada kredensial remote dari pengguna.
 - 31 Oktober 2026 — Implementasi M6 (Profil) selesai — Semua fitur lihat dan ubah profil serta keluar akun selesai, lulus verifikasi analyzer dan widget test.
+- 31 Oktober 2026 — Implementasi M7 (Polesan) selesai — Seluruh 9 layar lulus audit responsif T-RS-01 pada 6 ukuran layar x 2 skala teks (108 varian uji), audit aksesibilitas (seluruh IconButton bertooltip, gambar ber-semantics), dan audit teks UI.
 
 ## Versi paket terpasang (hasil flutter pub add)
 
