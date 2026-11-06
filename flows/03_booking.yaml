@@ -1,0 +1,80 @@
+# ==============================================================================
+# Fitur 3: Pemesanan & Pembatalan Rental Kendaraan
+# ==============================================================================
+# Alur:
+# 1. Buka formulir pemesanan dengan menekan "Pesan Sekarang"
+# 2. Verifikasi ringkasan kendaraan
+# 3. Pilih rentang tanggal sewa pada dialog kalender
+# 4. Input lokasi pengambilan kendaraan
+# 5. Input catatan opsional rental
+# 6. Periksa kalkulasi rincian harga sewa & tekan "Buat Pesanan"
+# 7. Verifikasi halaman "Detail Pesanan" (status Menunggu konfirmasi)
+# 8. Batalkan pesanan via dialog konfirmasi & verifikasi status Dibatalkan
+# ==============================================================================
+
+# 1. Buka Form Pemesanan dari Layar Detail
+- tapOn: "Pesan Sekarang"
+
+- extendedWaitUntil:
+    visible: "Form Pemesanan"
+    timeout: 10000
+
+- assertVisible: "Form Pemesanan"
+- assertVisible: "Toyota Avanza"
+
+# 2. Pilih Rentang Tanggal Sewa
+- tapOn: "Pilih tanggal mulai & selesai"
+
+- extendedWaitUntil:
+    visible: "Pilih"
+    timeout: 5000
+
+# Konfirmasi Tanggal yang Dipilih
+- tapOn: "Pilih"
+
+# 3. Input Lokasi Pengambilan
+- tapOn: "Contoh: Stasiun Gambir atau Bandara Soekarno Hatta"
+- inputText: "Stasiun Gambir, Jakarta"
+- hideKeyboard
+
+# 4. Input Catatan Tambahan (Opsional)
+- tapOn: "Catatan tambahan untuk pemilik rental"
+- inputText: "Siapkan unit dalam kondisi bersih"
+- hideKeyboard
+
+# 5. Gulir ke Bawah dan Periksa Ringkasan Biaya
+- scroll
+- assertVisible: "Rincian Biaya"
+
+# 6. Submit Pemesanan
+- tapOn: "Buat Pesanan"
+
+# 7. Verifikasi Pembuatan Pesanan di Layar Detail Pesanan
+- extendedWaitUntil:
+    visible: "Detail Pesanan"
+    timeout: 15000
+
+- assertVisible: "Detail Pesanan"
+- assertVisible: "Menunggu konfirmasi"
+- assertVisible: "Informasi Sewa"
+- assertVisible: "Stasiun Gambir, Jakarta"
+- assertVisible: "Rincian Pembayaran"
+
+# 8. Uji Pembatalan Pesanan
+- scroll
+- assertVisible: "Batalkan Pesanan"
+- tapOn: "Batalkan Pesanan"
+
+- extendedWaitUntil:
+    visible: "Batalkan pesanan?"
+    timeout: 5000
+
+- assertVisible: "Pesanan yang dibatalkan tidak dapat dikembalikan."
+- tapOn: "Batalkan"
+
+# Verifikasi Status Berubah Menjadi Dibatalkan
+- extendedWaitUntil:
+    visible: "Dibatalkan"
+    timeout: 10000
+
+- assertVisible: "Dibatalkan"

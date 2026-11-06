@@ -1,0 +1,83 @@
+# ==============================================================================
+# Fitur 4: Riwayat Pesanan & Profil Pengguna
+# ==============================================================================
+# Alur:
+# 1. Navigasi ke tab "Pesanan" pada bottom navigation bar
+# 2. Verifikasi riwayat pesanan (tab Aktif & Selesai yang memuat pesanan dibatalkan)
+# 3. Navigasi ke tab "Profil" pada bottom navigation bar
+# 4. Verifikasi informasi profil pengguna (email rodaku-user@yopmail.com)
+# 5. Uji form "Ubah profil" dan simpan
+# 6. Uji logout ("Keluar") dengan dialog konfirmasi
+# 7. Memverifikasi navigasi kembali ke layar login awal ("Masuk ke akun Anda")
+# ==============================================================================
+
+# 1. Navigasi ke Tab Riwayat Pesanan
+- tapOn: "Pesanan"
+
+- extendedWaitUntil:
+    visible: "Aktif"
+    timeout: 5000
+
+- assertVisible: "Selesai"
+
+# Beralih ke Tab Selesai untuk Memastikan Pesanan Dibatalkan Tercatat
+- tapOn: "Selesai"
+
+- extendedWaitUntil:
+    visible: "Dibatalkan"
+    timeout: 5000
+
+- assertVisible: "Dibatalkan"
+
+# Beralih Kembali ke Tab Aktif
+- tapOn: "Aktif"
+
+# 2. Navigasi ke Tab Profil Pengguna
+- tapOn: "Profil"
+
+- extendedWaitUntil:
+    visible: "rodaku-user@yopmail.com"
+    timeout: 10000
+
+- assertVisible: "rodaku-user@yopmail.com"
+- assertVisible: "Ubah profil"
+- assertVisible: "Keluar"
+
+# 3. Uji Ubah Profil
+- tapOn: "Ubah profil"
+
+- extendedWaitUntil:
+    visible: "Ubah Profil"
+    timeout: 5000
+
+- assertVisible: "Nama lengkap"
+- assertVisible: "Email"
+- assertVisible: "Nomor telepon (opsional)"
+
+# Simpan Perubahan Profil
+- tapOn: "Simpan"
+
+- extendedWaitUntil:
+    visible: "Keluar"
+    timeout: 5000
+
+# 4. Uji Keluar Akun (Logout)
+- tapOn: "Keluar"
+
+- extendedWaitUntil:
+    visible: "Keluar dari akun?"
+    timeout: 5000
+
+- assertVisible: "Anda perlu masuk lagi untuk memesan kendaraan."
+
+# Konfirmasi Keluar pada Dialog
+- tapOn:
+    text: "Keluar"
+    below: "Anda perlu masuk lagi untuk memesan kendaraan."
+
+# 5. Verifikasi Kembali ke Layar Masuk
+- extendedWaitUntil:
+    visible: "Masuk ke akun Anda"
+    timeout: 10000
+
+- assertVisible: "Masuk ke akun Anda"

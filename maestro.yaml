@@ -1,0 +1,31 @@
+appId: id.rodakuu.rodakuu
+---
+# ==============================================================================
+# RodaKuu - Maestro Master End-to-End Test Suite
+# ==============================================================================
+# Menjalankan pengujian 4 fitur utama aplikasi RodaKuu secara terintegrasi:
+# 1. Fitur Autentikasi (flows/01_auth.yaml)
+# 2. Fitur Katalog & Detail Kendaraan (flows/02_vehicles.yaml)
+# 3. Fitur Pemesanan & Pembatalan Rental (flows/03_booking.yaml)
+# 4. Fitur Riwayat Pesanan & Profil Pengguna (flows/04_history_profile.yaml)
+# ==============================================================================
+
+# Peluncuran aplikasi dengan reset state awal
+- launchApp:
+    clearState: true
+
+# 1. Eksekusi Fitur Autentikasi (Login)
+- runFlow:
+    file: flows/01_auth.yaml
+
+# 2. Eksekusi Fitur Katalog Kendaraan (Search, Filter, & Detail Kendaraan)
+- runFlow:
+    file: flows/02_vehicles.yaml
+
+# 3. Eksekusi Fitur Pemesanan Kendaraan (Booking Form, Tanggal, Lokasi, Submit, & Batal)
+- runFlow:
+    file: flows/03_booking.yaml
+
+# 4. Eksekusi Fitur Riwayat & Profil Pengguna (Tab Pesanan, Tab Profil, Ubah Profil, & Logout)
+- runFlow:
+    file: flows/04_history_profile.yaml

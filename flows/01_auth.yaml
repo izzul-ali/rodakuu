@@ -1,0 +1,39 @@
+# ==============================================================================
+# Fitur 1: Autentikasi Pengguna (Login)
+# ==============================================================================
+# Alur:
+# 1. Menunggu layar login "Masuk ke akun Anda"
+# 2. Input email (rodaku-user@yopmail.com)
+# 3. Input password (12345678)
+# 4. Tekan tombol "Masuk"
+# 5. Memverifikasi berhasil masuk ke Beranda ("Mau sewa apa hari ini?")
+# ==============================================================================
+
+- extendedWaitUntil:
+    visible: "Masuk ke akun Anda"
+    timeout: 10000
+
+- assertVisible: "Masuk ke akun Anda"
+
+# Input Email
+- tapOn: "nama@email.com"
+- inputText: "rodaku-user@yopmail.com"
+
+# Input Kata Sandi
+- tapOn: "Minimal 8 karakter"
+- inputText: "12345678"
+
+- hideKeyboard
+
+# Submit Login
+- tapOn: "Masuk"
+
+# Verifikasi Navigasi Masuk ke Beranda
+- extendedWaitUntil:
+    visible: "Mau sewa apa hari ini?"
+    timeout: 15000
+
+- assertVisible: "Mau sewa apa hari ini?"
+- assertVisible: "Beranda"
+- assertVisible: "Pesanan"
+- assertVisible: "Profil"

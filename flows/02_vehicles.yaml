@@ -1,0 +1,60 @@
+# ==============================================================================
+# Fitur 2: Katalog & Detail Kendaraan
+# ==============================================================================
+# Alur:
+# 1. Verifikasi katalog kendaraan di Beranda
+# 2. Uji fitur pencarian kendaraan (ketik "Avanza", verifikasi, lalu hapus pencarian)
+# 3. Uji filter kategori chip (Motor -> Mobil -> Semua)
+# 4. Pilih kendaraan "Toyota Avanza" dan verifikasi layar Detail Kendaraan
+# ==============================================================================
+
+- assertVisible: "Mau sewa apa hari ini?"
+
+# 1. Uji Pencarian Kendaraan
+- tapOn: "Cari merek atau nama"
+- inputText: "Avanza"
+- hideKeyboard
+
+- extendedWaitUntil:
+    visible: "Toyota Avanza"
+    timeout: 5000
+- assertVisible: "Toyota Avanza"
+
+# Hapus Pencarian
+- tapOn: "Hapus pencarian"
+
+- extendedWaitUntil:
+    visible: "Daihatsu Xenia"
+    timeout: 5000
+- assertVisible: "Daihatsu Xenia"
+
+# 2. Uji Filter Kategori Jenis Kendaraan
+# Filter Motor
+- tapOn: "Motor"
+- extendedWaitUntil:
+    visible: "Honda Beat"
+    timeout: 5000
+- assertVisible: "Honda Beat"
+
+# Filter Mobil
+- tapOn: "Mobil"
+- extendedWaitUntil:
+    visible: "Toyota Avanza"
+    timeout: 5000
+- assertVisible: "Toyota Avanza"
+
+# Kembalikan ke Semua Kategori
+- tapOn: "Semua"
+
+# 3. Navigasi ke Detail Kendaraan
+- tapOn: "Toyota Avanza"
+
+- extendedWaitUntil:
+    visible: "Spesifikasi"
+    timeout: 10000
+
+# Verifikasi Elemen Detail Kendaraan
+- assertVisible: "Toyota Avanza"
+- assertVisible: "Spesifikasi"
+- assertVisible: "Deskripsi"
+- assertVisible: "Pesan Sekarang"
