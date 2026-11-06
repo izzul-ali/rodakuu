@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:rodakuu/core/config/app_constants.dart';
 import 'package:rodakuu/core/error/app_failure.dart';
 import 'package:rodakuu/core/error/error_mapper.dart';
@@ -20,6 +21,14 @@ class SupabaseVehicleRepository implements VehicleRepository {
   @override
   Future<List<Vehicle>> getVehicles(VehicleFilter filter) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '🚙 [SUPABASE_VEHICLES] Memuat daftar kendaraan '
+          '(type: ${filter.type?.name}, query: "${filter.query}", '
+          'onlyAvailable: ${filter.onlyAvailable})',
+        );
+      }
+
       var query = _client.from('vehicles').select();
 
       if (filter.type != null) {
@@ -50,6 +59,13 @@ class SupabaseVehicleRepository implements VehicleRepository {
       };
 
       final rows = await ordered.limit(AppConstants.vehicleQueryLimit);
+
+      if (kDebugMode) {
+        debugPrint(
+          '🚙 [SUPABASE_VEHICLES_SUCCESS] Berhasil memuat ${(rows as List).length} armada dari Supabase.',
+        );
+      }
+
       return (rows as List<dynamic>)
           .map(
             (row) =>
@@ -57,13 +73,22 @@ class SupabaseVehicleRepository implements VehicleRepository {
           )
           .toList();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint('❌ [SUPABASE_VEHICLES_FAIL] Gagal memuat armada: $error');
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 
   @override
   Future<Vehicle> getVehicleById(String id) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '🚙 [SUPABASE_VEHICLE_DETAIL] Memuat detail kendaraan id: $id',
+        );
+      }
+
       final data = await _client
           .from('vehicles')
           .select()
@@ -74,9 +99,20 @@ class SupabaseVehicleRepository implements VehicleRepository {
         throw const NotFoundFailure('Kendaraan tidak ditemukan.');
       }
 
+      if (kDebugMode) {
+        debugPrint(
+          '🚙 [SUPABASE_VEHICLE_DETAIL_SUCCESS] Detail ditemukan: ${data['brand']} ${data['name']}',
+        );
+      }
+
       return VehicleDto.fromJson(data).toEntity();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint(
+          '❌ [SUPABASE_VEHICLE_DETAIL_FAIL] Gagal memuat detail kendaraan: $error',
+        );
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 }

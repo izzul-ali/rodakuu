@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:rodakuu/core/config/app_constants.dart';
 import 'package:rodakuu/core/error/app_failure.dart';
 import 'package:rodakuu/core/error/error_mapper.dart';
@@ -19,6 +20,14 @@ class SupabaseBookingRepository implements BookingRepository {
   @override
   Future<String> createBooking(BookingRequest request) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '📝 [SUPABASE_BOOKING] Memanggil RPC "create_booking" '
+          '(vehicleId: ${request.vehicleId}, '
+          'range: ${toDateOnlyString(request.startDate)} s.d. ${toDateOnlyString(request.endDate)})',
+        );
+      }
+
       final dynamic data = await _client.rpc(
         'create_booking',
         params: {
@@ -41,20 +50,41 @@ class SupabaseBookingRepository implements BookingRepository {
         );
       }
 
+      if (kDebugMode) {
+        debugPrint(
+          '✅ [SUPABASE_BOOKING_SUCCESS] Pesanan berhasil dibuat dengan ID: ${row['id']}',
+        );
+      }
+
       return row['id'] as String;
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint('❌ [SUPABASE_BOOKING_FAIL] Gagal membuat pesanan: $error');
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 
   @override
   Future<List<Booking>> getMyBookings() async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '📋 [SUPABASE_BOOKINGS] Memuat riwayat pesanan pengguna dari tabel "bookings"...',
+        );
+      }
+
       final rows = await _client
           .from('bookings')
           .select('*, vehicle:vehicles(id, type, brand, name, image_url)')
           .order('created_at', ascending: false)
           .limit(AppConstants.bookingQueryLimit);
+
+      if (kDebugMode) {
+        debugPrint(
+          '📋 [SUPABASE_BOOKINGS_SUCCESS] Berhasil memuat ${(rows as List).length} pesanan.',
+        );
+      }
 
       return (rows as List<dynamic>)
           .map(
@@ -63,13 +93,24 @@ class SupabaseBookingRepository implements BookingRepository {
           )
           .toList();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint(
+          '❌ [SUPABASE_BOOKINGS_FAIL] Gagal memuat riwayat pesanan: $error',
+        );
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 
   @override
   Future<Booking> getBooking(String id) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '📋 [SUPABASE_BOOKING_DETAIL] Memuat rincian pesanan id: $id',
+        );
+      }
+
       final data = await _client
           .from('bookings')
           .select('*, vehicle:vehicles(id, type, brand, name, image_url)')
@@ -80,28 +121,68 @@ class SupabaseBookingRepository implements BookingRepository {
         throw const NotFoundFailure('Pesanan tidak ditemukan.');
       }
 
+      if (kDebugMode) {
+        debugPrint(
+          '📋 [SUPABASE_BOOKING_DETAIL_SUCCESS] Rincian pesanan ditemukan: ${data['id']}',
+        );
+      }
+
       return BookingDto.fromJson(data).toEntity();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint(
+          '❌ [SUPABASE_BOOKING_DETAIL_FAIL] Gagal memuat rincian pesanan: $error',
+        );
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 
   @override
   Future<void> cancelBooking(String id) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '🚫 [SUPABASE_CANCEL] Membatalkan pesanan via RPC "cancel_booking" id: $id',
+        );
+      }
+
       await _client.rpc('cancel_booking', params: {'p_booking_id': id});
+
+      if (kDebugMode) {
+        debugPrint(
+          '✅ [SUPABASE_CANCEL_SUCCESS] Pesanan $id berhasil dibatalkan',
+        );
+      }
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint(
+          '❌ [SUPABASE_CANCEL_FAIL] Gagal membatalkan pesanan: $error',
+        );
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 
   @override
   Future<List<BookedRange>> getBookedRanges(String vehicleId) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '📅 [SUPABASE_RANGES] Memuat rentang tanggal terisi untuk vehicleId: $vehicleId',
+        );
+      }
+
       final rows = await _client.rpc(
         'get_booked_ranges',
         params: {'p_vehicle_id': vehicleId},
       );
+
+      if (kDebugMode) {
+        debugPrint(
+          '📅 [SUPABASE_RANGES_SUCCESS] Ditemukan ${(rows as List).length} rentang terisi.',
+        );
+      }
 
       return (rows as List<dynamic>)
           .map(
@@ -110,7 +191,12 @@ class SupabaseBookingRepository implements BookingRepository {
           )
           .toList();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint(
+          '❌ [SUPABASE_RANGES_FAIL] Gagal memuat rentang terisi: $error',
+        );
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 }

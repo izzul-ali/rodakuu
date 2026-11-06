@@ -30,7 +30,8 @@ class DateRangeField extends StatelessWidget {
       context: context,
       firstDate: today,
       lastDate: maxDate,
-      initialDateRange: selectedRange ??
+      initialDateRange:
+          selectedRange ??
           DateTimeRange(
             start: today.add(const Duration(days: 1)),
             end: today.add(const Duration(days: 3)),

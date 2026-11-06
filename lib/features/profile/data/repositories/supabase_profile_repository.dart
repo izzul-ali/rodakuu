@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:rodakuu/core/error/app_failure.dart';
 import 'package:rodakuu/core/error/error_mapper.dart';
 import 'package:rodakuu/features/profile/data/models/profile_dto.dart';
@@ -14,6 +15,12 @@ class SupabaseProfileRepository implements ProfileRepository {
   @override
   Future<Profile> getProfile(String userId) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '👤 [SUPABASE_PROFILE] Mengambil profil untuk userId: $userId',
+        );
+      }
+
       final data = await _client
           .from('profiles')
           .select()
@@ -25,9 +32,19 @@ class SupabaseProfileRepository implements ProfileRepository {
       }
 
       final email = _client.auth.currentUser?.email ?? '';
+
+      if (kDebugMode) {
+        debugPrint(
+          '👤 [SUPABASE_PROFILE_SUCCESS] Profil ditemukan: ${data['full_name']} ($email)',
+        );
+      }
+
       return ProfileDto.fromJson(data, email: email).toEntity();
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint('❌ [SUPABASE_PROFILE_FAIL] Gagal memuat profil: $error');
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 
@@ -38,6 +55,12 @@ class SupabaseProfileRepository implements ProfileRepository {
     String? phone,
   }) async {
     try {
+      if (kDebugMode) {
+        debugPrint(
+          '👤 [SUPABASE_PROFILE_UPDATE] Memperbarui profil userId: $userId',
+        );
+      }
+
       await _client
           .from('profiles')
           .update({
@@ -47,8 +70,19 @@ class SupabaseProfileRepository implements ProfileRepository {
                 : null,
           })
           .eq('id', userId);
+
+      if (kDebugMode) {
+        debugPrint(
+          '👤 [SUPABASE_PROFILE_UPDATE_SUCCESS] Profil berhasil diperbarui.',
+        );
+      }
     } catch (error, stackTrace) {
-      Error.throwWithStackTrace(mapToFailure(error), stackTrace);
+      if (kDebugMode) {
+        debugPrint(
+          '❌ [SUPABASE_PROFILE_UPDATE_FAIL] Gagal memperbarui profil: $error',
+        );
+      }
+      Error.throwWithStackTrace(mapToFailure(error, stackTrace), stackTrace);
     }
   }
 }

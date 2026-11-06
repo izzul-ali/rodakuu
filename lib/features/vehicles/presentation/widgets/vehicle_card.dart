@@ -24,7 +24,8 @@ class VehicleCard extends StatelessWidget {
       child: Semantics(
         identifier: 'vehicle-card-${vehicle.id}',
         child: InkWell(
-          onTap: onTap ??
+          onTap:
+              onTap ??
               () {
                 debugPrint('VEHICLE CARD CLICKED: ${vehicle.fullName}');
                 debugPrint('VEHICLE ID: ${vehicle.id}');

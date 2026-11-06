@@ -1,18 +1,87 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show debugPrint, kDebugMode;
 import 'package:rodakuu/core/error/app_failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Memetakan berbagai exception menjadi subclass [AppFailure].
-AppFailure mapToFailure(Object error) {
+/// Memetakan berbagai exception menjadi subclass [AppFailure] dengan logging debug lengkap.
+AppFailure mapToFailure(Object error, [StackTrace? stackTrace]) {
   if (error is AppFailure) {
     return error;
   }
 
+  if (kDebugMode) {
+    debugPrint(
+      '═══════════════════════════════════════════════════════════════',
+    );
+    debugPrint('🚨 [SUPABASE_ERROR] Terjadi kesalahan: (${error.runtimeType})');
+    debugPrint('🚨 [MESSAGE]: $error');
+
+    if (error is SocketException) {
+      debugPrint(
+        '🚨 [SOCKET_DETAIL] OS Error: ${error.osError?.message} '
+        '(code: ${error.osError?.errorCode})',
+      );
+      debugPrint(
+        '🚨 [SOCKET_DETAIL] Host: ${error.address?.host}, Port: ${error.port}',
+      );
+    } else if (error is AuthException) {
+      debugPrint(
+        '🚨 [AUTH_DETAIL] Code: ${error.code}, StatusCode: ${error.statusCode}, '
+        'Message: ${error.message}',
+      );
+    } else if (error is PostgrestException) {
+      debugPrint(
+        '🚨 [POSTGREST_DETAIL] Code: ${error.code}, Message: ${error.message}',
+      );
+      debugPrint(
+        '🚨 [POSTGREST_DETAIL] Details: ${error.details}, Hint: ${error.hint}',
+      );
+    } else if (error is TimeoutException) {
+      debugPrint(
+        '🚨 [TIMEOUT_DETAIL] Durasi: ${error.duration}, Message: ${error.message}',
+      );
+    } else if (error is HttpException) {
+      debugPrint(
+        '🚨 [HTTP_DETAIL] URI: ${error.uri}, Message: ${error.message}',
+      );
+    }
+
+    if (stackTrace != null) {
+      debugPrint('🚨 [STACKTRACE]:\n$stackTrace');
+    }
+  }
+
+  final failure = _resolveFailure(error);
+
+  if (kDebugMode) {
+    debugPrint(
+      '📌 [MAPPED_TO]: ${failure.runtimeType} -> "${failure.message}"',
+    );
+    debugPrint(
+      '═══════════════════════════════════════════════════════════════',
+    );
+  }
+
+  return failure;
+}
+
+AppFailure _resolveFailure(Object error) {
+  final errorStr = error.toString().toLowerCase();
+
   if (error is SocketException ||
       error is TimeoutException ||
-      error is AuthRetryableFetchException) {
+      error is AuthRetryableFetchException ||
+      errorStr.contains('socketexception') ||
+      errorStr.contains('clientexception') ||
+      errorStr.contains('failed host lookup') ||
+      errorStr.contains('network is unreachable') ||
+      errorStr.contains('connection refused') ||
+      errorStr.contains('connection closed') ||
+      errorStr.contains('connection reset') ||
+      errorStr.contains('handshakeexception') ||
+      errorStr.contains('tlsexception')) {
     return const NetworkFailure();
   }
 
