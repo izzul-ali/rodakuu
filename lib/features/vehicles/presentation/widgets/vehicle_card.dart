@@ -22,7 +22,11 @@ class VehicleCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.lg),
       clipBehavior: Clip.antiAlias,
       child: Semantics(
+        container: true,
+        button: true,
+        label: vehicle.fullName,
         identifier: 'vehicle-card-${vehicle.id}',
+        excludeSemantics: true,
         child: InkWell(
           onTap:
               onTap ??

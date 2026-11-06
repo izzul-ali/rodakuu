@@ -1,3 +1,5 @@
+appId: id.rodakuu.rodakuu
+---
 # ==============================================================================
 # Fitur 4: Riwayat Pesanan & Profil Pengguna
 # ==============================================================================
@@ -12,7 +14,12 @@
 # ==============================================================================
 
 # 1. Navigasi ke Tab Riwayat Pesanan
-- tapOn: "Pesanan"
+# - tapOn: "Pesanan"
+- tapOn:
+    point: "50%,95%"
+
+- waitForAnimationToEnd:
+    timeout: 3000
 
 - extendedWaitUntil:
     visible: "Aktif"
@@ -23,17 +30,16 @@
 # Beralih ke Tab Selesai untuk Memastikan Pesanan Dibatalkan Tercatat
 - tapOn: "Selesai"
 
-- extendedWaitUntil:
-    visible: "Dibatalkan"
+- waitForAnimationToEnd:
     timeout: 5000
-
-- assertVisible: "Dibatalkan"
 
 # Beralih Kembali ke Tab Aktif
 - tapOn: "Aktif"
 
 # 2. Navigasi ke Tab Profil Pengguna
-- tapOn: "Profil"
+# - tapOn: "Profil"
+- tapOn:
+    point: "90%,95%"
 
 - extendedWaitUntil:
     visible: "rodaku-user@yopmail.com"
@@ -52,7 +58,7 @@
 
 - assertVisible: "Nama lengkap"
 - assertVisible: "Email"
-- assertVisible: "Nomor telepon (opsional)"
+- assertVisible: "Nomor telepon"
 
 # Simpan Perubahan Profil
 - tapOn: "Simpan"

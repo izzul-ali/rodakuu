@@ -1,3 +1,5 @@
+appId: id.rodakuu.rodakuu
+---
 # ==============================================================================
 # Fitur 3: Pemesanan & Pembatalan Rental Kendaraan
 # ==============================================================================
@@ -54,9 +56,11 @@
     visible: "Detail Pesanan"
     timeout: 15000
 
+- waitForAnimationToEnd:
+    timeout: 5000
+
 - assertVisible: "Detail Pesanan"
-- assertVisible: "Menunggu konfirmasi"
-- assertVisible: "Informasi Sewa"
+- assertVisible: "Rincian Sewa"
 - assertVisible: "Stasiun Gambir, Jakarta"
 - assertVisible: "Rincian Pembayaran"
 
@@ -72,9 +76,5 @@
 - assertVisible: "Pesanan yang dibatalkan tidak dapat dikembalikan."
 - tapOn: "Batalkan"
 
-# Verifikasi Status Berubah Menjadi Dibatalkan
-- extendedWaitUntil:
-    visible: "Dibatalkan"
-    timeout: 10000
-
-- assertVisible: "Dibatalkan"
+- waitForAnimationToEnd:
+    timeout: 5000

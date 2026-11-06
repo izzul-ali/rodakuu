@@ -28,26 +28,32 @@ class BookingStatusChip extends StatelessWidget {
       ),
     };
 
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isLarge ? AppSpacing.md : AppSpacing.sm,
-        vertical: isLarge ? AppSpacing.sm : AppSpacing.xs,
-      ),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
-        border: Border.all(
-          color: status == BookingStatus.dikonfirmasi
-              ? AppColors.border
-              : textColor.withValues(alpha: 0.3),
-          width: 1,
+    return Semantics(
+      container: true,
+      label: status.label,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: isLarge ? AppSpacing.md : AppSpacing.sm,
+          vertical: isLarge ? AppSpacing.sm : AppSpacing.xs,
         ),
-      ),
-      child: Text(
-        status.label,
-        style:
-            (isLarge ? theme.textTheme.labelLarge : theme.textTheme.labelSmall)
-                ?.copyWith(color: textColor, fontWeight: FontWeight.w600),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+          border: Border.all(
+            color: status == BookingStatus.dikonfirmasi
+                ? AppColors.border
+                : textColor.withValues(alpha: 0.3),
+            width: 1,
+          ),
+        ),
+        child: Text(
+          status.label,
+          style:
+              (isLarge
+                      ? theme.textTheme.labelLarge
+                      : theme.textTheme.labelSmall)
+                  ?.copyWith(color: textColor, fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }

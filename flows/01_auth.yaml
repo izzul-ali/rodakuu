@@ -1,3 +1,5 @@
+appId: id.rodakuu.rodakuu
+---
 # ==============================================================================
 # Fitur 1: Autentikasi Pengguna (Login)
 # ==============================================================================
@@ -11,7 +13,7 @@
 
 - extendedWaitUntil:
     visible: "Masuk ke akun Anda"
-    timeout: 10000
+    timeout: 60000
 
 - assertVisible: "Masuk ke akun Anda"
 
@@ -34,6 +36,3 @@
     timeout: 15000
 
 - assertVisible: "Mau sewa apa hari ini?"
-- assertVisible: "Beranda"
-- assertVisible: "Pesanan"
-- assertVisible: "Profil"

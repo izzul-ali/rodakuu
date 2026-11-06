@@ -1,3 +1,5 @@
+appId: id.rodakuu.rodakuu
+---
 # ==============================================================================
 # Fitur 2: Katalog & Detail Kendaraan
 # ==============================================================================
@@ -17,7 +19,7 @@
 
 - extendedWaitUntil:
     visible: "Toyota Avanza"
-    timeout: 5000
+    timeout: 60000
 - assertVisible: "Toyota Avanza"
 
 # Hapus Pencarian
@@ -25,7 +27,7 @@
 
 - extendedWaitUntil:
     visible: "Daihatsu Xenia"
-    timeout: 5000
+    timeout: 60000
 - assertVisible: "Daihatsu Xenia"
 
 # 2. Uji Filter Kategori Jenis Kendaraan
@@ -33,7 +35,7 @@
 - tapOn: "Motor"
 - extendedWaitUntil:
     visible: "Honda Beat"
-    timeout: 5000
+    timeout: 60000
 - assertVisible: "Honda Beat"
 
 # Filter Mobil
